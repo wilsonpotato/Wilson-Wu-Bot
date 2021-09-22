@@ -1,13 +1,18 @@
 import discord
 from discord.ext import commands
 import random
+import os
+from dotenv import load_dotenv
 import praw
 
-reddit=praw.Reddit(client_id="wFV657W4HM2uaw",
-                   client_secret="lBq9FEKc-0esigXO92IlyI3rTR9W8g",
-                   username="WillyThePotato",
-                   password="351386WWW",
-                   user_agent="apple")
+#loads the .env
+load_dotenv()
+
+reddit=praw.Reddit(client_id=os.getenv('CLIENT_ID'),
+                   client_secret=os.getenv('SECRET'),
+                   username=os.getenv('USERNAME'),
+                   password=os.getenv('PASSWORD'),
+                   user_agent=os.getenv('USER_AGENT'))
 
 
 

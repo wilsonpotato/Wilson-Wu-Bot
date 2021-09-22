@@ -3,10 +3,13 @@ from discord.ext import commands
 import traceback
 import sys
 
+#error handling cog
 
 class errorHandling(commands.Cog):
   def __init__(self, bot):
       self.bot = bot
+
+#if the command is not valid, sends a message in the channel
   @commands.Cog.listener()
   async def on_command_error(self, ctx, error):
     if isinstance(error, commands.CommandNotFound):
@@ -16,6 +19,8 @@ class errorHandling(commands.Cog):
       error.add_field(name='Valid Commands:', value='\nhelp, quote, penis, dm, everyone, here, hentai, dm2, dm3, suggest, snipe, meme ')
 
       await ctx.channel.send(embed=error)
+
+    #sends a message to the channel if someone uses the command on a user that doesn't exist
     if isinstance(error, commands.UserNotFound):
       error = discord.Embed(title='Invalid Username',
                              description='\nMake sure it is the actual username of the user you want to dm.',
@@ -23,6 +28,8 @@ class errorHandling(commands.Cog):
       error.add_field(name='PS:', value='\n You need to put "" between usernames.')
 
       await ctx.channel.send(embed=error)
+
+    #tells the user that the command is on cooldown
     if isinstance(error, commands.CommandOnCooldown):
 
       error = discord.Embed(title='Command on Cooldown',
@@ -31,6 +38,7 @@ class errorHandling(commands.Cog):
 
       await ctx.channel.send(embed=error)
 
+    #the bot doesn't have perms :c
     if isinstance(error, commands.MissingPermissions):
 
       error = discord.Embed(title='Missing Permissions',
@@ -39,6 +47,7 @@ class errorHandling(commands.Cog):
 
       await ctx.channel.send(embed=error)
 
+    #command missing input
     if isinstance(error, commands.MissingRequiredArgument):
 
       error = discord.Embed(title='Missing Argument',
