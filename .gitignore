@@ -3,7 +3,7 @@ msgcount.json
 quotes.txt
 suggestions.txt
 music
-*/.idea/*
+.idea/
 */__pycache__/*
 
 
